@@ -1,50 +1,59 @@
-# CakePHP
+# National Holiday API
+日本の祝日を教えてくれる API です。  
+(適宜キャッシュした上で) 自由に使って下さい。
 
-[![Latest Stable Version](https://poser.pugx.org/cakephp/cakephp/v/stable.svg)](https://packagist.org/packages/cakephp/cakephp)
-[![License](https://poser.pugx.org/cakephp/cakephp/license.svg)](https://packagist.org/packages/cakephp/cakephp)
-[![Bake Status](https://secure.travis-ci.org/cakephp/cakephp.png?branch=master)](http://travis-ci.org/cakephp/cakephp)
-[![Code consistency](http://squizlabs.github.io/PHP_CodeSniffer/analysis/cakephp/cakephp/grade.svg)](http://squizlabs.github.io/PHP_CodeSniffer/analysis/cakephp/cakephp/)
+## End Point
+GET http://api.kei500.com/national_holiday/:date
 
-[![CakePHP](http://cakephp.org/img/cake-logo.png)](http://www.cakephp.org)
+##### date = yyyy-mm-dd
+指定日が祝日かどうかを返します。  
+日付を指定しなかった場合は今日の結果を返します。
+```javascript
+// 2015-01-01
+{
+  is_national_holiday: true,
+  name: "元旦"
+}
 
-CakePHP is a rapid development framework for PHP which uses commonly known design patterns like Active Record, Association Data Mapping, Front Controller and MVC.
-Our primary goal is to provide a structured framework that enables PHP users at all levels to rapidly develop robust web applications, without any loss to flexibility.
+// 2015-01-02
+{
+  is_national_holiday: false
+}
+```
 
+##### date = yyyy-mm
+指定月の祝日を全て返します。  
+祝日が1つもない場合は 404 を返します。
 
-## Some Handy Links
+```javascript
+// 2015-01
+{
+  2015-01-01: "元旦",
+  2015-01-12: "成人の日"
+}
+```
 
-[CakePHP](http://www.cakephp.org) - The rapid development PHP framework
-
-[CookBook](http://book.cakephp.org) - THE CakePHP user documentation; start learning here!
-
-[API](http://api.cakephp.org) - A reference to CakePHP's classes
-
-[Plugins](http://plugins.cakephp.org/) - A repository of extensions to the framework
-
-[The Bakery](http://bakery.cakephp.org) - Tips, tutorials and articles
-
-[Community Center](http://community.cakephp.org) - A source for everything community related
-
-[Training](http://training.cakephp.org) - Join a live session and get skilled with the framework
-
-[CakeFest](http://cakefest.org) - Don't miss our annual CakePHP conference
-
-[Cake Software Foundation](http://cakefoundation.org) - Promoting development related to CakePHP
-
-
-## Get Support!
-
-[#cakephp](http://webchat.freenode.net/?channels=#cakephp) on irc.freenode.net - Come chat with us, we have cake
-
-[Google Group](https://groups.google.com/group/cake-php) - Community mailing list and forum
-
-[GitHub Issues](https://github.com/cakephp/cakephp/issues) - Got issues? Please tell us!
-
-[Roadmaps](https://github.com/cakephp/cakephp/wiki#roadmaps) - Want to contribute? Get involved!
-
-
-## Contributing
-
-[CONTRIBUTING.md](CONTRIBUTING.md) - Quick pointers for contributing to the CakePHP project
-
-[CookBook "Contributing" Section (2.x)](http://book.cakephp.org/2.0/en/contributing.html) [(3.0)](http://book.cakephp.org/3.0/en/contributing.html) - Version-specific details about contributing to the project
+##### date = yyyy
+指定年の祝日を全て返します。
+```javascript
+// 2015
+{
+  2015-01-01: "元旦",
+  2015-01-12: "成人の日",
+  2015-02-11: "建国記念の日",
+  2015-03-21: "春分の日",
+  2015-04-29: "昭和の日",
+  2015-05-03: "憲法記念日",
+  2015-05-04: "みどりの日",
+  2015-05-05: "子どもの日",
+  2015-05-06: "振替休日",
+  2015-07-20: "海の日",
+  2015-09-21: "敬老の日",
+  2015-09-22: "国民の祝日",
+  2015-09-23: "秋分の日",
+  2015-10-12: "体育の日",
+  2015-11-03: "文化の日",
+  2015-11-23: "勤労感謝の日",
+  2015-12-23: "天皇誕生日"
+}
+```
