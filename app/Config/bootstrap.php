@@ -106,3 +106,8 @@ CakeLog::config('error', array(
 	'types' => array('warning', 'error', 'critical', 'alert', 'emergency'),
 	'file' => 'error',
 ));
+CakeLog::config('access', array(
+	'engine' => 'File',
+	'types' => array('access'),
+	'file' => date('Ymd').'_'.'access',
+));
